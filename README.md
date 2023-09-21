@@ -1,2 +1,2 @@
-# furfam
+# astrofur
 Astrocom Fur Pets
