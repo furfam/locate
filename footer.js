@@ -12,13 +12,50 @@ document.write(`
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 `);
 
+function fn_normalize_all(val){return val.replaceAll("Ä«", "").replaceAll("Ä", "").replaceAll("Å¡", "").replaceAll("Ä“", "").normalize("NFD").replaceAll(/[\u0300-\u036f]/g, "").replaceAll(/\s+/g, '').replaceAll("&", "").replaceAll("/", "").replaceAll("(", "").replaceAll(")", "").replaceAll("Â©","").replaceAll("Â®","").toLowerCase();}
+
+$(".hero-cta a").each(function() {
+  var thiscon = "0"+parseInt($(this).find("small").text().replaceAll("x","1").replaceAll("y","5").replaceAll("z","9"))/62497;
+  var thisms = ""; if ($(this).attr("href") == "sms:") { thisms = "&body=Hi! I found..."; }
+  $(this).find("small").text(thiscon);
+  $(this).attr("href",$(this).attr("href")+thiscon+thisms);
+});
+
+$(".hero-cta h5").each(function() {
+  var thisadd = decodeString($(this).find("small").text());
+  var thisname = decodeString($(this).find("span").text());
+  $(this).find("small").text(thisadd);
+  $(this).find("span").text(thisname);
+});
+
+
+function decodeString(encoded) {
+  return encoded.split('').map(char => {
+    if (char >= 'a' && char <= 'z') {
+      return String.fromCharCode(((char.charCodeAt(0) - 'a'.charCodeAt(0) + 20) % 26) + 'a'.charCodeAt(0));
+    } else if (char >= 'A' && char <= 'Z') {
+      return String.fromCharCode(((char.charCodeAt(0) - 'A'.charCodeAt(0) + 18) % 26) + 'A'.charCodeAt(0));
+    }
+    return char;
+  }).join('');
+}
+
+
 var divcta = $(".hero-cta").html();
 $("body.pro .solo-cta").html(divcta).addClass("hero-cta");
 
+
+
 const pets = [];
-$("main.content section:not(.hero)").each(function() {
-  pets.push($(this).attr("id").toLowerCase());
+$(".pet-card").each(function() {
+  var thispet = decodeString($(this).find(".pet-name").text());
+  $(this).attr("id",fn_normalize_all(thispet));
+  $(this).find(".pet-name").text(thispet);
+  pets.push(fn_normalize_all(thispet));
 });
+
+
+
 
 var maincontent = $("main.content");
 $("main.content").remove();
@@ -29,12 +66,12 @@ $("main.login input").keypress(function (e) {
 });
 
 if (baseacc == "sample") {
-  $("main.login input").val("meow1");
+  $("main.login input").val("meow 1");
 }
 
 $("main.login .btn-login").click(function() {
   $("main.login input + small").remove();
-  var getpet = $("main.login input").val().toLowerCase();
+  var getpet = fn_normalize_all($("main.login input").val());
   if (getpet == "") {
     setTimeout(function() { $("main.login input").after("<small class='text-danger d-block'>Pet name requried.</small>"); },150);
     $(this).focus();
@@ -61,24 +98,3 @@ $("main.login .btn-login").click(function() {
     }
   }
 });
-
-
-// function fn_getlocation() {
-//   fetch('https://api.geoapify.com/v1/ipinfo?apiKey=e455ec7cd1674bc6aac10351180d3273')
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log(data);
-//   })
-// }
-
-// function fn_getlocation() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(showPosition);
-//   } else {
-//     x.innerHTML = "Geolocation is not supported by this browser.";
-//   }
-// }
-//
-// function showPosition(position) {
-//   alert(position.coords.latitude+","+position.coords.longitude);
-// }
