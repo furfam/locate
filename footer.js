@@ -67,7 +67,7 @@ $("main.login input").keypress(function (e) {
 });
 
 if (baseacc == "sample") {
-  $("main.login input").val("meow 1");
+  $("main.login input").val("");
 }
 
 $("main.login .btn-login").click(function() {
