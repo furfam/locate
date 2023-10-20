@@ -7,10 +7,10 @@ document.write(`
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>`+basetitle+`</title>
-	<meta name="description" content="">
+	<meta name="description" content="FurFam is your dedicated partner for lost fur family. Equipped with our complimentary QR tags, your pets are always one-scan away.">
 	<meta name="keywords" content="">
 	<meta name="robots" content="" />
-	<meta property="og:image" content="">
+	<meta property="og:image" content="`+baseurl+`files/site_preview.jpg">
 	<link rel="shortcut icon" href="`+baseurl+`files/img-favicon.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
