@@ -16,7 +16,8 @@ function fn_normalize_all(val){return val.replaceAll("Ä«", "").replaceAll("Ä�
 
 $(".hero-cta a").each(function() {
   var thiscon = "0"+parseInt($(this).find("small").text().replaceAll("x","1").replaceAll("y","5").replaceAll("z","9"))/62497;
-  var thisms = ""; if ($(this).attr("href") == "sms:") { thisms = "&body=Hi! I found..."; }
+  var smsmsg = "Hi! I found your pet! Please respond, thank you 🐶🐱";
+  var thisms = ""; if ($(this).attr("href") == "sms:") { thisms = "&body="+smsmsg+""; }
   $(this).find("small").text(thiscon);
   $(this).attr("href",$(this).attr("href")+thiscon+thisms);
 });
@@ -93,7 +94,7 @@ $("main.login .btn-login").click(function() {
         },300);
       },700);
     } else {
-      setTimeout(function() { $("main.login input").after("<small class='text-danger d-block'>Pet name requried.</small>"); },150);
+      setTimeout(function() { $("main.login input").after("<small class='text-danger d-block mt-2 lh-sm'>Pet name not registered. Check the spelling.</small>"); },150);
       $(this).focus();
     }
   }
